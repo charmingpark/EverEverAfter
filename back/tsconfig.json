@@ -38,6 +38,7 @@
         "forceConsistentCasingInFileNames": true,
         // [ Build ]
         "listFiles": false,
-        "listEmittedFiles": true
+        "listEmittedFiles": true,    
+        "types": ["vitest/globals"]
     }
 }
