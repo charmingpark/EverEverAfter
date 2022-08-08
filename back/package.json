@@ -1,0 +1,15 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/cors": "^8.0.0",
+    "@trpc/server": "^9.26.2",
+    "fastify": "^4.3.0",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4",
+    "vitest": "^0.18.1",
+    "zod": "^3.17.10"
+  }
+}
