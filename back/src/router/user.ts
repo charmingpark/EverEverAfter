@@ -6,27 +6,22 @@ type UserT = z.infer<typeof userSchema>;
 
 let fakeDB: UserT[] = [];
 
-export const appRouter = trpc
+export const userRouter = trpc
   .router()
-  .query('getUsers', {
+  .query('get', {
     async resolve() {
       return fakeDB;
     },
   })
-  .mutation('createUser', {
+  .mutation('create', {
     input: userSchema,
     async resolve({ input }) {
       fakeDB = [...fakeDB, input];
     },
   })
-  .mutation('clearUser', {
+  .mutation('clear', {
     input: z.object({}),
     async resolve() {
       fakeDB = [];
     },
-  })
-
-// only export *type signature* of router!
-// to avoid accidentally importing your API
-// into client-side code
-export type AppRouter = typeof appRouter;
+  });
