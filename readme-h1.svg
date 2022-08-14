@@ -2,10 +2,12 @@
 	<foreignObject width="100%" height="100%">
 		<div xmlns="http://www.w3.org/1999/xhtml">
 			<style>
-				@import url('https://fonts.googleapis.com/css2?family=Clicker+Script&display=swap');
+				@font-face {
+      font-family: "Bitstream Vera Serif Bold";
+      src: url("https://developer.mozilla.org/@api/deki/files/2934/=VeraSeBd.ttf");
+    }
 				.container {
-					font-family:
-						'Clicker Script', cursive;
+					font-family: "Bitstream Vera Serif Bold", serif 
 					justify-content: center;
 					margin: 0;
 					width: 100%;
