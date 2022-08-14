@@ -3,11 +3,11 @@
 		<div xmlns="http://www.w3.org/1999/xhtml">
 			<style>
 				@font-face {
-      font-family: "Bitstream Vera Serif Bold";
-      src: url("https://fonts.googleapis.com/css2?family=Clicker+Script&display=swap");
+      font-family: "Clicker";
+      src:url('fonts/ClickerScript-Regular.ttf');
     }
 				.container {
-					font-family: "Bitstream Vera Serif Bold", serif 
+					font-family: "Clicker", serif 
 					justify-content: center;
 					margin: 0;
 					width: 100%;
