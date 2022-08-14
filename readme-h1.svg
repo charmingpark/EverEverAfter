@@ -4,7 +4,7 @@
 			<style>
 				@font-face {
       font-family: "Bitstream Vera Serif Bold";
-      src: url("https://developer.mozilla.org/@api/deki/files/2934/=VeraSeBd.ttf");
+      src: url("https://fonts.googleapis.com/css2?family=Clicker+Script&display=swap");
     }
 				.container {
 					font-family: "Bitstream Vera Serif Bold", serif 
