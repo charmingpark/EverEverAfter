@@ -11,15 +11,10 @@ type PostT = z.infer<typeof postSchema>;
 export interface PostRepository {
   all: () => Promise<PostT[]>,
   add: (newPost: PostT) => Promise<void>,
+  delete : (message:string)=> Promise<void>,
 }
 
-let fakeDB: PostT[] = [{
-  message: 'test',
-  images: ["https://pbs.twimg.com/profile_banners/1261543922309849088/1615648508/1500x500"]
-}, {
-  message: 'test2',
-  images: ["https://pbs.twimg.com/profile_banners/1261543922309849088/1615648508/1500x500"]
-}];
+let fakeDB: PostT[] = [];
 
 export const fakeRepo: PostRepository = {
   async all(){
@@ -27,6 +22,9 @@ export const fakeRepo: PostRepository = {
   },
   async add(newPost){
     fakeDB = [...fakeDB, newPost];
+  },
+  async delete(message){
+    fakeDB = fakeDB.filter((post)=> post.message !== message);
   }
 }
 
@@ -42,5 +40,11 @@ export const postRouter = trpc
     input: postSchema,
     async resolve({ input }) {
       fakeRepo.add(input);
+    },
+  })
+  .mutation('delete', {
+    input: z.object({ message : z.string()}),
+    async resolve({ input }) {
+      fakeRepo.delete(input.message);
     },
   });

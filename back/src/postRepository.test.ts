@@ -16,5 +16,9 @@ describe("post", () => {
     await repo.add(NEW_POST);
     // post가 들어 있는 배열이 온다.
     expect(await repo.all()).toStrictEqual([NEW_POST]);
+
+    await repo.delete(NEW_POST.message);
+
+    expect(await repo.all()).toStrictEqual([]);
   });
 });
