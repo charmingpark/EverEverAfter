@@ -8,19 +8,39 @@ const postSchema = z.object({
 
 type PostT = z.infer<typeof postSchema>;
 
-let fakeDB: PostT[] = [];
+export interface PostRepository {
+  all: () => Promise<PostT[]>,
+  add: (newPost: PostT) => Promise<void>,
+}
+
+let fakeDB: PostT[] = [{
+  message: 'test',
+  images: ["https://pbs.twimg.com/profile_banners/1261543922309849088/1615648508/1500x500"]
+}, {
+  message: 'test2',
+  images: ["https://pbs.twimg.com/profile_banners/1261543922309849088/1615648508/1500x500"]
+}];
+
+export const fakeRepo: PostRepository = {
+  async all(){
+    return fakeDB;
+  },
+  async add(newPost){
+    fakeDB = [...fakeDB, newPost];
+  }
+}
 
 export const postRouter = trpc
   .router()
   .query('all', {
     output: z.array(postSchema),
     async resolve() {
-      return fakeDB;
+      return fakeRepo.all();
     },
   })
   .mutation('create', {
     input: postSchema,
     async resolve({ input }) {
-      fakeDB = [...fakeDB, input];
+      fakeRepo.add(input);
     },
   });
