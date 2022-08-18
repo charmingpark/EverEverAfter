@@ -24,6 +24,7 @@
   "dependencies": {
     "@trpc/client": "^9.26.2",
     "@trpc/react": "^9.26.2",
+    "daisyui": "^2.22.0",
     "react-query": "3"
   }
 }
