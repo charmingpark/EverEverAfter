@@ -1,4 +1,4 @@
-import { appRouter } from "./router";
+import { appRouter } from ".";
 
 const NEW_POST = {
   message: 'test',

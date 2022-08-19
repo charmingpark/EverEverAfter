@@ -1,5 +1,5 @@
 import * as trpc from '@trpc/server';
-import { z } from 'zod';
+import { string, z } from 'zod';
 
 const postSchema = z.object({
   message: z.string().min(1),
@@ -11,15 +11,10 @@ type PostT = z.infer<typeof postSchema>;
 export interface PostRepository {
   all: () => Promise<PostT[]>,
   add: (newPost: PostT) => Promise<void>,
+  modify: (targetMessage: string, newMessage: string) => Promise<void>
 }
 
-let fakeDB: PostT[] = [{
-  message: 'test',
-  images: ["https://pbs.twimg.com/profile_banners/1261543922309849088/1615648508/1500x500"]
-}, {
-  message: 'test2',
-  images: ["https://pbs.twimg.com/profile_banners/1261543922309849088/1615648508/1500x500"]
-}];
+let fakeDB: PostT[] = [];
 
 export const fakeRepo: PostRepository = {
   async all(){
@@ -27,6 +22,20 @@ export const fakeRepo: PostRepository = {
   },
   async add(newPost){
     fakeDB = [...fakeDB, newPost];
+  },
+  async modify(targetMessage, newMessage){
+    fakeDB = fakeDB.map((post) => {
+      if(post.message === targetMessage) {
+        const modifiedPost = {
+          message: newMessage,
+          images: post.images
+        }
+        return modifiedPost
+      }else{
+        return post
+      }
+    }
+    )
   }
 }
 
@@ -43,4 +52,12 @@ export const postRouter = trpc
     async resolve({ input }) {
       fakeRepo.add(input);
     },
-  });
+  })
+  // 만약 modify에 두가지 인자를 넣어야한다면..?
+  .mutation('modify', {
+    input: z.string(),
+    async resolve({input}){
+      fakeRepo.modify(input, input)
+    }
+  })
+  ;
