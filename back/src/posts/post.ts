@@ -24,18 +24,20 @@ export const fakeRepo: PostRepository = {
     fakeDB = [...fakeDB, newPost];
   },
   async modify({targetMessage, newMessage}){
-    fakeDB = fakeDB.map((post) => {
-      if(post.message === targetMessage) {
-        const modifiedPost = {
-          message: newMessage,
-          images: post.images
-        }
-        return modifiedPost
-      }else{
-        return post
-      }
+    const newDB = [...fakeDB];
+    
+    const targetIndex = fakeDB.findIndex((post) => post.message === targetMessage);
+
+    if(targetIndex === -1){
+      throw new Error(`404 not found for ${targetMessage}`);
     }
-    )
+
+    const old = newDB[targetIndex]!;
+    newDB[targetIndex] = {
+      message: newMessage,
+      images: old.images
+    }
+    fakeDB = newDB;
   }
 }
 
