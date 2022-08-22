@@ -1,5 +1,5 @@
 import * as trpc from '@trpc/server';
-import { postRouter } from './posts/post';
+import { postRouter } from './posts/router';
 import { userRouter } from './users/user';
 
 export const appRouter = trpc
