@@ -5,8 +5,7 @@ const NEW_POST = {
   images: ["https://pbs.twimg.com/profile_banners/1261543922309849088/1615648508/1500x500"]
 };
 
-// 포스트를 작성하면, 추가된다!
-describe("post", () => {
+describe("posts", () => {
   it('scenario', async () => {
     const ctx = {};
     // caller를 만들고
@@ -18,5 +17,15 @@ describe("post", () => {
     await caller.mutation('post.create', NEW_POST);
     // post가 들어 있는 배열이 온다.
     expect(await caller.query('post.all')).toStrictEqual([NEW_POST]);
+
+    await caller.mutation('post.modify', {
+      targetMessage: NEW_POST.message,
+      newMessage: 'modified'
+    })
+
+    expect(await caller.query('post.all')).toStrictEqual([{
+      message: 'modified',
+      images: NEW_POST.images,
+    }]);
   });
 });

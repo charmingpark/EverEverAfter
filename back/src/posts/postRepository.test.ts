@@ -22,7 +22,10 @@ describe("post", () => {
     // post가 들어 있는 배열이 온다.
     expect(await repo.all()).toStrictEqual([NEW_POST]);
     // post의 message를 수정하면
-    await repo.modify(NEW_POST.message, MODIFY_POST_MESSAGE)
+    await repo.modify({
+      targetMessage: NEW_POST.message,
+      newMessage: MODIFY_POST_MESSAGE
+    })
     // 수정된 post의 배열이 온다
     expect(await repo.all()).toStrictEqual([MODIFIED_POST])
   });
