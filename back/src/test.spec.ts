@@ -15,6 +15,7 @@ describe("posts", () => {
     expect(await caller.query('post.all')).toStrictEqual([]);
     // 새 post를 추가하면
     await caller.mutation('post.create', NEW_POST);
+
     // post가 들어 있는 배열이 온다.
     expect(await caller.query('post.all')).toStrictEqual([NEW_POST]);
 
@@ -27,5 +28,11 @@ describe("posts", () => {
       message: 'modified',
       images: NEW_POST.images,
     }]);
+
+    await caller.mutation('post.delete', { message : 'modified'})
+
+    // 다시 비어 있게 된다
+    expect(await caller.query('post.all')).toStrictEqual([]);
+
   });
 });

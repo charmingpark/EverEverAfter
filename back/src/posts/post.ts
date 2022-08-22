@@ -11,6 +11,7 @@ type PostT = z.infer<typeof postSchema>;
 export interface PostRepository {
   all: () => Promise<PostT[]>,
   add: (newPost: PostT) => Promise<void>,
+  delete : (message:string)=> Promise<void>,
   modify: (input: { targetMessage: string, newMessage: string }) => Promise<void>
 }
 
@@ -22,6 +23,9 @@ export const fakeRepo: PostRepository = {
   },
   async add(newPost){
     fakeDB = [...fakeDB, newPost];
+  },
+  async delete(message){
+    fakeDB = fakeDB.filter((post)=> post.message !== message);
   },
   async modify({targetMessage, newMessage}){
     const newDB = [...fakeDB];
@@ -55,7 +59,12 @@ export const postRouter = trpc
       fakeRepo.add(input);
     },
   })
-  // 만약 modify에 두가지 인자를 넣어야한다면..?
+  .mutation('delete', {
+    input: z.object({ message : z.string()}),
+    async resolve({ input }) {
+      fakeRepo.delete(input.message);
+    },
+  })
   .mutation('modify', {
     input: z.object({
       targetMessage: z.string(),

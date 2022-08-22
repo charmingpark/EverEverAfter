@@ -28,5 +28,9 @@ describe("post", () => {
     })
     // 수정된 post의 배열이 온다
     expect(await repo.all()).toStrictEqual([MODIFIED_POST])
+
+    await repo.delete(MODIFIED_POST.message);
+
+    expect(await repo.all()).toStrictEqual([]);
   });
 });
