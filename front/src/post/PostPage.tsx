@@ -1,16 +1,15 @@
 import { trpc } from '../trpc';
-import React, { useState, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import PostForm from './PostForm';
 import PostList from './PostList';
 
+export const queryClient = new QueryClient();
+const trpcClient = trpc.createClient({
+  url: 'http://localhost:5000/trpc',
+});
+
 export default function PostPage() {
-  const [queryClient] = useState(() => new QueryClient());
-  const [trpcClient] = useState(() =>
-    trpc.createClient({
-      url: 'http://localhost:5000/trpc',
-    })
-  );
 
   return (
     <trpc.Provider

@@ -28,10 +28,11 @@ export default function PostForm() {
         className="input input-bordered"
         type="text"
         value={postInput}
+        placeholder="ex) 차밍아 결혼 축하해"
         onChange={(e) => setPostInput(e.target.value)}
       />
       <button className="btn btn-primary" type="submit">
-        테스트 방명록 추가
+        올리기
       </button>
     </form>
   );

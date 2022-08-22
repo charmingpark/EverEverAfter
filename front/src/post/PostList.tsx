@@ -38,6 +38,7 @@ function PostItem({ post }: { post: PostT }) {
             className="input input-bordered"
             type="text"
             value={newMessage}
+            placeholder={post.message}
             onChange={(e) => setNewMessage(e.target.value)}
           />
           <div className="card-actions justify-end">
