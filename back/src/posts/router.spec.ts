@@ -20,19 +20,23 @@ describe("posts", () => {
     await caller.mutation('post.create', NEW_POST);
 
     // post가 들어 있는 배열이 온다.
-    expect(await caller.query('post.all')).toStrictEqual([NEW_POST]);
+    expect(await caller.query('post.all')).toStrictEqual([{
+      id: 1,
+      ...NEW_POST
+    }]);
 
     await caller.mutation('post.modify', {
-      targetMessage: NEW_POST.message,
+      targetId: 1,
       newMessage: 'modified'
     })
 
     expect(await caller.query('post.all')).toStrictEqual([{
+      id: 1,
       message: 'modified',
       images: NEW_POST.images,
     }]);
 
-    await caller.mutation('post.delete', { message : 'modified'})
+    await caller.mutation('post.delete', { targetId : 1 })
 
     // 다시 비어 있게 된다
     expect(await caller.query('post.all')).toStrictEqual([]);
