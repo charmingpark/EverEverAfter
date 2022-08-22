@@ -4,7 +4,7 @@ import { userRouter } from './users/user';
 
 export const appRouter = trpc
   .router()
-  .merge('user.', userRouter)
-  .merge('post.', postRouter);
+  .merge('post.', postRouter)
+  .merge('user.', userRouter);
 
 export type AppRouter = typeof appRouter;

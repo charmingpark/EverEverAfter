@@ -1,4 +1,5 @@
-import { appRouter } from ".";
+import { router } from '@trpc/server';
+import { postRouter } from "./router";
 
 const NEW_POST = {
   message: 'test',
@@ -9,7 +10,9 @@ describe("posts", () => {
   it('scenario', async () => {
     const ctx = {};
     // caller를 만들고
-    const caller = appRouter.createCaller(ctx);
+    const caller = router()
+      .merge('post.', postRouter)
+      .createCaller(ctx);
 
     // 처음에는 비어 있는데
     expect(await caller.query('post.all')).toStrictEqual([]);
