@@ -29,7 +29,7 @@ describe("posts", () => {
       images: NEW_POST.images,
     }]);
 
-    await caller.mutation('post.delete', { message : NEW_POST.message})
+    await caller.mutation('post.delete', { message : 'modified'})
 
     // 다시 비어 있게 된다
     expect(await caller.query('post.all')).toStrictEqual([]);
