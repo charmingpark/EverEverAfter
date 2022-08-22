@@ -1,6 +1,6 @@
 import * as trpc from '@trpc/server';
-import { postRouter } from './post';
-import { userRouter } from './user';
+import { postRouter } from './posts/post';
+import { userRouter } from './users/user';
 
 export const appRouter = trpc
   .router()

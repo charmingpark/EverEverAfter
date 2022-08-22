@@ -12,6 +12,7 @@ export interface PostRepository {
   all: () => Promise<PostT[]>,
   add: (newPost: PostT) => Promise<void>,
   delete : (message:string)=> Promise<void>,
+  modify: (input: { targetMessage: string, newMessage: string }) => Promise<void>
 }
 
 let fakeDB: PostT[] = [];
@@ -25,6 +26,22 @@ export const fakeRepo: PostRepository = {
   },
   async delete(message){
     fakeDB = fakeDB.filter((post)=> post.message !== message);
+  },
+  async modify({targetMessage, newMessage}){
+    const newDB = [...fakeDB];
+    
+    const targetIndex = fakeDB.findIndex((post) => post.message === targetMessage);
+
+    if(targetIndex === -1){
+      throw new Error(`404 not found for ${targetMessage}`);
+    }
+
+    const old = newDB[targetIndex]!;
+    newDB[targetIndex] = {
+      message: newMessage,
+      images: old.images
+    }
+    fakeDB = newDB;
   }
 }
 
@@ -47,4 +64,13 @@ export const postRouter = trpc
     async resolve({ input }) {
       fakeRepo.delete(input.message);
     },
+  })
+  .mutation('modify', {
+    input: z.object({
+      targetMessage: z.string(),
+      newMessage: z.string(),
+    }),
+    async resolve({input}){
+      fakeRepo.modify(input)
+    }
   });
