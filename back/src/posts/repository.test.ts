@@ -1,4 +1,4 @@
-import { PostRepository, fakeRepo } from "./post";
+import { PostRepository, fakeRepo } from "./repository";
 
 const NEW_POST = {
   message: 'test',

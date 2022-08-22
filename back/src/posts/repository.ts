@@ -1,12 +1,4 @@
-import * as trpc from '@trpc/server';
-import { z } from 'zod';
-
-const postSchema = z.object({
-  message: z.string().min(1),
-  images: z.array(z.string().url()),
-});
-
-type PostT = z.infer<typeof postSchema>;
+import type { PostT } from "./schema";
 
 export interface PostRepository {
   all: () => Promise<PostT[]>,
@@ -44,33 +36,3 @@ export const fakeRepo: PostRepository = {
     fakeDB = newDB;
   }
 }
-
-export const postRouter = trpc
-  .router()
-  .query('all', {
-    output: z.array(postSchema),
-    async resolve() {
-      return fakeRepo.all();
-    },
-  })
-  .mutation('create', {
-    input: postSchema,
-    async resolve({ input }) {
-      fakeRepo.add(input);
-    },
-  })
-  .mutation('delete', {
-    input: z.object({ message : z.string()}),
-    async resolve({ input }) {
-      fakeRepo.delete(input.message);
-    },
-  })
-  .mutation('modify', {
-    input: z.object({
-      targetMessage: z.string(),
-      newMessage: z.string(),
-    }),
-    async resolve({input}){
-      fakeRepo.modify(input)
-    }
-  });
