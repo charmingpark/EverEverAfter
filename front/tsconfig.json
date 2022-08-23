@@ -2,13 +2,28 @@
   "compilerOptions": {
     "jsx": "react",
     "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "ESNext",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "noUncheckedIndexedAccess": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "strictNullChecks": true,
     "types": [
       "astro/client",
       "vitest/globals"
-    ]
-  }
+    ],
+  },
+  "include": [
+    "../back/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "./*.js",
+    "./src/**/*.js"
+  ],
 }
