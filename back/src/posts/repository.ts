@@ -1,38 +1,53 @@
-import type { PostT } from "./schema";
+import type { PostT } from './schema';
 
 export interface PostRepository {
-  all: () => Promise<PostT[]>,
-  add: (newPost: PostT) => Promise<void>,
-  delete : (message:string)=> Promise<void>,
-  modify: (input: { targetMessage: string, newMessage: string }) => Promise<void>
+  all: () => Promise<PostT[]>;
+  add: (newPost: Omit<PostT, 'id'>) => Promise<void>;
+  delete: (targetId: PostT['id']) => Promise<void>;
+  modify: (input: {
+    targetId: PostT['id'];
+    newMessage: string;
+  }) => Promise<void>;
 }
 
-let fakeDB: PostT[] = [];
+export function FakeRepo(init: PostT[] = []): PostRepository {
+  let _fakeDB = init;
+  let _count = Math.max(0, ...init.map(post => post.id));
+  
+  return {
+    async all() {
+      return _fakeDB;
+    },
+    async add(newPost) {
+      _count++;
+      _fakeDB = [
+        ..._fakeDB,
+        {
+          id: _count,
+          ...newPost,
+        },
+      ];
+    },
+    async delete(targetId) {
+      _fakeDB = _fakeDB.filter((post) => post.id !== targetId);
+    },
+    async modify({ targetId, newMessage }) {
+      const newDB = [..._fakeDB];
 
-export const fakeRepo: PostRepository = {
-  async all(){
-    return fakeDB;
-  },
-  async add(newPost){
-    fakeDB = [...fakeDB, newPost];
-  },
-  async delete(message){
-    fakeDB = fakeDB.filter((post)=> post.message !== message);
-  },
-  async modify({targetMessage, newMessage}){
-    const newDB = [...fakeDB];
-    
-    const targetIndex = fakeDB.findIndex((post) => post.message === targetMessage);
+      const targetIndex = _fakeDB.findIndex((post) => post.id === targetId);
 
-    if(targetIndex === -1){
-      throw new Error(`404 not found for ${targetMessage}`);
-    }
+      if (targetIndex === -1) {
+        throw new Error(`404 not found for ${targetId}`);
+      }
 
-    const old = newDB[targetIndex]!;
-    newDB[targetIndex] = {
-      message: newMessage,
-      images: old.images
-    }
-    fakeDB = newDB;
-  }
+      const old = newDB[targetIndex]!;
+      newDB[targetIndex] = {
+        ...old,
+        message: newMessage,
+      };
+      _fakeDB = newDB;
+    },
+  };
 }
+
+export const fakeRepo: PostRepository = FakeRepo([]);

@@ -12,20 +12,23 @@ export const postRouter = trpc
     },
   })
   .mutation('create', {
-    input: postSchema,
+    input: postSchema
+      .omit({ id: true }),
     async resolve({ input }) {
       fakeRepo.add(input);
     },
   })
   .mutation('delete', {
-    input: z.object({ message : z.string()}),
+    input: z.object({ 
+      targetId: z.number()
+    }),
     async resolve({ input }) {
-      fakeRepo.delete(input.message);
+      fakeRepo.delete(input.targetId);
     },
   })
   .mutation('modify', {
     input: z.object({
-      targetMessage: z.string(),
+      targetId: z.number(),
       newMessage: z.string(),
     }),
     async resolve({input}){
