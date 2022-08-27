@@ -11,6 +11,7 @@
         "outDir": "dist",
         // [ Basics ]
         "strict": true,
+        "strictNullChecks": true,
         "checkJs": true,
         "sourceMap": true,
         "importHelpers": true,

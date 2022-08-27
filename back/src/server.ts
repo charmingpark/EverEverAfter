@@ -11,7 +11,7 @@ const server = fastify({
 
 server.register(cors, {
   origin: ['http://localhost:3000']
-})
+});
 
 server.register(fastifyTRPCPlugin, {
   prefix: '/trpc',
