@@ -5,7 +5,7 @@ export interface CommentRepository {
   getCommentsByPostId: (postId: PostT['id']) => Promise<CommentT[]>;
   addCommentToPost: (
     postId: PostT['id'],
-    newComment: Omit<CommentT, 'id'>,
+    newComment: Omit<CommentT, 'id'>
   ) => Promise<void>;
 }
 
@@ -14,31 +14,32 @@ type _FakeDB = {
 };
 // post가 하나 작성되어있다고 가정했다.
 export function FakeRepo(init: _FakeDB = { 1: [] }): CommentRepository {
-  let _fakeDB = init;
+  const _fakeDB = init;
 
   let _count = Math.max(
     0,
     ...Object.values(init).flatMap((comments) =>
-      comments.map((comment) => comment.id),
-    ),
+      comments.map((comment) => comment.id)
+    )
   );
 
   return {
     async getCommentsByPostId(postId) {
-      if (!(postId in _fakeDB)) {
+      const comments = _fakeDB[postId];
+      if (comments === undefined) {
         throw Error('404 not found');
       }
 
-      return _fakeDB[postId]!;
+      return comments;
     },
     async addCommentToPost(postId, newComment) {
-      if (!(postId in _fakeDB)) {
+      const comments = _fakeDB[postId];
+      if (comments === undefined) {
         throw Error('404 not found');
       }
 
       _count++;
-
-      _fakeDB[postId]!.push({
+      comments.push({
         id: _count,
         ...newComment,
       });
