@@ -12,15 +12,14 @@ export const postRouter = trpc
     },
   })
   .mutation('create', {
-    input: postSchema
-      .omit({ id: true }),
+    input: postSchema.omit({ id: true }),
     async resolve({ input }) {
       fakeRepo.add(input);
     },
   })
   .mutation('delete', {
-    input: z.object({ 
-      targetId: z.number()
+    input: z.object({
+      targetId: z.number(),
     }),
     async resolve({ input }) {
       fakeRepo.delete(input.targetId);
@@ -31,7 +30,7 @@ export const postRouter = trpc
       targetId: z.number(),
       newMessage: z.string(),
     }),
-    async resolve({input}){
-      fakeRepo.modify(input)
-    }
+    async resolve({ input }) {
+      fakeRepo.modify(input);
+    },
   });

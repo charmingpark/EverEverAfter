@@ -12,8 +12,8 @@ export interface PostRepository {
 
 export function FakeRepo(init: PostT[] = []): PostRepository {
   let _fakeDB = init;
-  let _count = Math.max(0, ...init.map(post => post.id));
-  
+  let _count = Math.max(0, ...init.map((post) => post.id));
+
   return {
     async all() {
       return _fakeDB;
@@ -34,18 +34,20 @@ export function FakeRepo(init: PostT[] = []): PostRepository {
     async modify({ targetId, newMessage }) {
       const newDB = [..._fakeDB];
 
-      const targetIndex = _fakeDB.findIndex((post) => post.id === targetId);
+      const targetIndex = newDB.findIndex((post) => post.id === targetId);
 
       if (targetIndex === -1) {
         throw new Error(`404 not found for ${targetId}`);
       }
 
-      const old = newDB[targetIndex]!;
-      newDB[targetIndex] = {
-        ...old,
-        message: newMessage,
-      };
-      _fakeDB = newDB;
+      const old = newDB[targetIndex];
+      if(old){
+        newDB[targetIndex] = {
+          ...old,
+          message: newMessage,
+        };
+        _fakeDB = newDB;
+      }
     },
   };
 }

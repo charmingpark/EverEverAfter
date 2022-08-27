@@ -20,10 +20,9 @@ export const commentRouter = trpc
     input: z.object({
       // id: postSchema.pick({ id: true}),
       id: z.number(),
-      comment: commentSchema
-      .omit({ id: true }),
+      comment: commentSchema.omit({ id: true }),
     }),
     async resolve({ input }) {
       fakeRepo.addCommentToPost(input.id, input.comment);
     },
-  })
+  });
