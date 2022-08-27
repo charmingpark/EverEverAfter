@@ -10,7 +10,7 @@ export interface PostRepository {
   }) => Promise<void>;
 }
 
-export function FakeRepo(init: PostT[] = []): PostRepository {
+export function FakePostRepo(init: PostT[]): PostRepository {
   let _fakeDB = init;
   let _count = Math.max(0, ...init.map((post) => post.id));
 
@@ -52,4 +52,3 @@ export function FakeRepo(init: PostT[] = []): PostRepository {
   };
 }
 
-export const fakeRepo: PostRepository = FakeRepo([]);
