@@ -5,9 +5,9 @@ import { FakePostRepo } from './posts/repository';
 
 export type ContextT = PostRepoContext & CommentRepoContext;
 
+const postRepo = FakePostRepo([]);
+const commentRepo = FakeCommentRepo({});
+
 export async function createContext(): Promise<ContextT> {
-  return {
-    postRepo: FakePostRepo([]),
-    commentRepo: FakeCommentRepo({}),
-  };
+  return { postRepo, commentRepo };
 }
