@@ -1,7 +1,18 @@
+---
+import HamburgerIcon from "../components/icons/HamburgerIcon.astro";
+import HomeIcon from "../components/icons/HomeIcon.astro";
+
+---
+
 <nav class="navbar bg-red-500">
   <div class="flex-none">
     <slot name="nav-left-button">
-      <a href="/" class="btn btn-square btn-ghost"> 백</a>
+      <div class="tooltip tooltip-bottom" data-tip="프로필">
+        <button class="btn btn-square btn-ghost" aria-label="프로필">
+          <HamburgerIcon />
+        </button>
+      </div>
+      
     </slot>
   </div>
   <div class="flex-1 flex justify-center">
@@ -11,7 +22,11 @@
   </div>
   <div class="flex-none">
     <slot name="nav-right-button">
-      <a href="/" class="btn btn-square btn-ghost"> 홈</a>
+      <div class="tooltip tooltip-bottom" data-tip="홈으로 가기">
+        <a href="/" class="btn btn-square btn-ghost" aria-label="홈으로 가기">
+          <HomeIcon />
+        </a>
+      </div>
     </slot>
   </div>
 </nav>
@@ -19,3 +34,8 @@
   <slot />
 </main>
 
+<style is:global>
+  .tooltip::before {
+    z-index: 10;
+  }
+</style>

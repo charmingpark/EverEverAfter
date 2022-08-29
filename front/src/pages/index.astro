@@ -1,4 +1,5 @@
 ---
+import ProfileIcon from "../components/icons/ProfileIcon.astro";
 import BottomNav from "../layouts/BottomNav.astro";
 import Layout from "../layouts/Layout.astro";
 import PhoneLayout from "../layouts/PhoneLayout.astro";
@@ -6,26 +7,21 @@ import PhoneLayout from "../layouts/PhoneLayout.astro";
 
 <Layout title="차밍의 백년가약">
 	<PhoneLayout>
-		<button slot="nav-left-button" class="btn btn-square btn-ghost">
-			햄버거
-		</button>
 		<span slot="title" class="text-xl">百年佳約</span>
-		<button slot="nav-right-button" class="btn btn-square btn-ghost">
-			프로필
-		</button>
-    내용
-  </PhoneLayout>
+		<div
+			slot="nav-right-button"
+			class="tooltip tooltip-bottom"
+			data-tip="프로필 보기"
+		>
+			<button class="btn btn-square btn-ghost" aria-label="프로필 보기">
+				<ProfileIcon />
+			</button>
+		</div>
+		내용
+	</PhoneLayout>
 	<BottomNav>
-
-    <div slot="footer-right-button">
-      <a href="/greeting" class="btn btn-ghost w-full">인사말</a>
-    </div>
+		<div slot="footer-right-button">
+			<a href="/greeting" class="btn btn-ghost w-full">인사말</a>
+		</div>
 	</BottomNav>
 </Layout>
-
-<style>
-	:root {
-		--astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
-		font-family: "Pretendard";
-	}
-</style>

@@ -1,4 +1,5 @@
 ---
+import PencilSquare from "../components/icons/PencilSquareIcon.astro";
 import Layout from "../layouts/Layout.astro";
 import PhoneLayout from "../layouts/PhoneLayout.astro";
 import PostPage from "../post/PostPage";
@@ -9,8 +10,8 @@ import PostPage from "../post/PostPage";
 		<span slot="title" class="text-xl">방명록</span>
 		<label for="my-modal-6" class="btn btn-primary modal-button">공유</label>
 		<PostPage client:load />
-		<button class="btn btn-circle btn-primary absolute right-4 bottom-4">
-			쓰기
+		<button class="btn btn-circle btn-primary absolute right-4 bottom-4" aria-label="방명록 쓰기">
+			<PencilSquare />	
 		</button>
 	</PhoneLayout>
 	<input type="checkbox" id="my-modal-6" class="modal-toggle" />
