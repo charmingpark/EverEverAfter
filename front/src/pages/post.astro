@@ -1,14 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PostPage from '../post/PostPage';
+import PhoneLayout from "../layouts/PhoneLayout.astro";
+import PostPage from "../post/PostPage";
 ---
 
 <Layout title="Welcome to Rabbit Hole.">
-    <PostPage client:load/>
+	<PhoneLayout>
+		<span slot="title" class="text-xl">방명록</span>
+		<label for="my-modal-6" class="btn btn-primary modal-button">공유</label>
+		<PostPage client:load />
+		<button class="btn btn-circle btn-primary absolute right-4 bottom-4">
+			쓰기
+		</button>
+	</PhoneLayout>
+	<input type="checkbox" id="my-modal-6" class="modal-toggle" />
+	<div class="modal modal-bottom">
+		<div class="modal-box">
+			<h3 class="font-bold text-lg">Congratulations random Internet user!</h3>
+			<p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+			<div class="modal-action">
+				<label for="my-modal-6" class="btn">Yay!</label>
+			</div>
+		</div>
+	</div>
 </Layout>
-
-<style>
-	h1 {
-		margin: 2rem 0;
-	}
-</style>
