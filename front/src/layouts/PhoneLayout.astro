@@ -1,0 +1,21 @@
+<nav class="navbar bg-red-500">
+  <div class="flex-none">
+    <slot name="nav-left-button">
+      <a href="/" class="btn btn-square btn-ghost"> 백</a>
+    </slot>
+  </div>
+  <div class="flex-1 flex justify-center">
+    <slot name="title">
+      <span class="text-xl">百年佳約</span>
+    </slot>
+  </div>
+  <div class="flex-none">
+    <slot name="nav-right-button">
+      <a href="/" class="btn btn-square btn-ghost"> 홈</a>
+    </slot>
+  </div>
+</nav>
+<main class="p-4 shadow-lg bg-blue-500 w-full h-full relative">
+  <slot />
+</main>
+
