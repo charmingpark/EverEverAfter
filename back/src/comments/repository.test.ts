@@ -14,14 +14,26 @@ describe('comment', () => {
       '404 not found'
     );
 
-    // id가 1인 post의 댓글을 추가한다.
+    // id가 1인 post에 댓글을 추가한다.
     await repo.addCommentToPost(POST_ID_1, {
       message: '안녕',
     });
-    // id가 1인 post에 댓글이 추가되었다.
+    const COMMENT_ID = 1;
+    // id가 1인 post에 id가 1인 댓글이 추가되었다.
     expect(await repo.getCommentsByPostId(POST_ID_1)).toStrictEqual([
-      { id: 1, message: '안녕' },
+      { id: COMMENT_ID, message: '안녕' },
     ]);
+    
+    await repo.updateComment(POST_ID_1, COMMENT_ID,'바이');
+
+    // expect(actual).toStrictEqual(expected)
+    // actual 과 expected 가 같은가?
+    expect(await repo.getCommentsByPostId(POST_ID_1)).toStrictEqual([
+      { id: COMMENT_ID, message: '바이' },
+    ]);
+
+    await repo.deleteComment(POST_ID_1, COMMENT_ID);
+    expect(await repo.getCommentsByPostId(POST_ID_1)).toStrictEqual([]);
   });
   
   it('autoincrement', async () => {
