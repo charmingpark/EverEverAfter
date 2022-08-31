@@ -1,10 +1,10 @@
 import * as trpc from '@trpc/server';
 import { z } from 'zod';
-import { fakeRepo } from './repository';
+import type { CommentRepoContext } from './CommentRepoContext';
 import { commentSchema } from './schema';
 
 export const commentRouter = trpc
-  .router()
+  .router<CommentRepoContext>()
   .query('read', {
     // input: postSchema.pick({ id: true}),
     // postSchema의 id를 활용하는것이 목적성에 맞을까?
@@ -12,8 +12,8 @@ export const commentRouter = trpc
     // request를 보내주는것을 이미 front가 알고있기에 이렇게 사용해도 무방하다 생각되어 이렇게 작성했다.
     input: z.number(),
     output: z.array(commentSchema),
-    async resolve({ input }) {
-      return fakeRepo.getCommentsByPostId(input);
+    async resolve({ input, ctx }) {
+      return ctx.commentRepo.getCommentsByPostId(input);
     },
   })
   .mutation('create', {
@@ -22,7 +22,7 @@ export const commentRouter = trpc
       id: z.number(),
       comment: commentSchema.omit({ id: true }),
     }),
-    async resolve({ input }) {
-      fakeRepo.addCommentToPost(input.id, input.comment);
+    async resolve({ input, ctx }) {
+      ctx.commentRepo.addCommentToPost(input.id, input.comment);
     },
   });

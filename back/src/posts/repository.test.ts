@@ -1,4 +1,4 @@
-import { PostRepository, FakeRepo } from './repository';
+import { FakePostRepo } from './repository';
 
 const NEW_POST = {
   message: 'test',
@@ -18,7 +18,7 @@ const MODIFIED_POST = {
 // 포스트를 작성하면, 추가된다!
 describe('post', () => {
   it('scenario', async () => {
-    const repo: PostRepository = FakeRepo();
+    const repo = FakePostRepo([]);
     // 처음에는 비어 있는데
     expect(await repo.all()).toStrictEqual([]);
     // 새 post를 추가하면
@@ -44,7 +44,7 @@ describe('post', () => {
   });
 
   it('autoincrement', async () => {
-    const repo = FakeRepo([
+    const repo = FakePostRepo([
       {
         id: 5,
         message: 'test2',

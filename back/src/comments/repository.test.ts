@@ -1,11 +1,11 @@
-import { FakeRepo } from './repository';
+import { FakeCommentRepo } from './repository';
 
 const POST_ID_1 = 1;
 
 // 포스트를 작성하면, 추가된다!
 describe('comment', () => {
   it('scenario', async () => {
-    const repo = FakeRepo();
+    const repo = FakeCommentRepo({ [POST_ID_1]: [] });
     // 처음에는 id가 1인 post의 댓글 목록은 비어있다.
     expect(await repo.getCommentsByPostId(POST_ID_1)).toStrictEqual([]);
     // post가 없으면 댓글목록을 가져올 수 없다.
@@ -25,7 +25,7 @@ describe('comment', () => {
   });
   
   it('autoincrement', async () => {
-    const repo = FakeRepo({
+    const repo = FakeCommentRepo({
       1: [
         { id: 2, message: '안녕' },
         { id: 4, message: '안녕2' },

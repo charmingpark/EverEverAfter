@@ -1,7 +1,7 @@
 import type { PostT } from '../posts/schema';
 import type { CommentT } from './schema';
 
-export interface CommentRepository {
+export interface ICommentRepository {
   getCommentsByPostId: (postId: PostT['id']) => Promise<CommentT[]>;
   addCommentToPost: (
     postId: PostT['id'],
@@ -13,7 +13,7 @@ type _FakeDB = {
   [postId: PostT['id']]: CommentT[];
 };
 // post가 하나 작성되어있다고 가정했다.
-export function FakeRepo(init: _FakeDB = { 1: [] }): CommentRepository {
+export function FakeCommentRepo(init: _FakeDB): ICommentRepository {
   const _fakeDB = init;
 
   let _count = Math.max(
@@ -46,5 +46,3 @@ export function FakeRepo(init: _FakeDB = { 1: [] }): CommentRepository {
     },
   };
 }
-
-export const fakeRepo: CommentRepository = FakeRepo();
