@@ -1,3 +1,4 @@
+import { createTestContext } from '../createContext';
 import { FakePostRepo } from './repository';
 import { postRouter } from './router';
 
@@ -10,9 +11,9 @@ const NEW_POST = {
 
 describe('posts', () => {
   it('scenario', async () => {
-    const ctx = {
+    const ctx = await createTestContext({
       postRepo: FakePostRepo([]),
-    };
+    });
     // caller를 만들고
     const caller = postRouter.createCaller(ctx);
 

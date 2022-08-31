@@ -1,3 +1,4 @@
+import { createTestContext } from '../createContext';
 import { FakeCommentRepo } from './repository';
 import { commentRouter } from './router';
 
@@ -6,9 +7,10 @@ const POST_ID_1 = 1;
 describe('comments', () => {
   it('scenario', async () => {
     // caller를 만들고
-    const caller = commentRouter.createCaller({
+    const ctx = await createTestContext({
       commentRepo: FakeCommentRepo({ [POST_ID_1]: [] })
     });
+    const caller = commentRouter.createCaller(ctx);
 
     // 처음에는 id가 1인 post의 댓글 목록은 비어있다.
     expect(await caller.query('read', POST_ID_1)).toStrictEqual([]);

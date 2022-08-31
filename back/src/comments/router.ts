@@ -1,10 +1,8 @@
-import * as trpc from '@trpc/server';
 import { z } from 'zod';
-import type { CommentRepoContext } from './CommentRepoContext';
+import { createRouter } from '../createRouter';
 import { commentSchema } from './schema';
 
-export const commentRouter = trpc
-  .router<CommentRepoContext>()
+export const commentRouter = createRouter()
   .query('read', {
     // input: postSchema.pick({ id: true}),
     // postSchema의 id를 활용하는것이 목적성에 맞을까?

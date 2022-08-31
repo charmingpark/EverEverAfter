@@ -1,11 +1,11 @@
-import * as trpc from '@trpc/server';
-import type { ContextT } from './createContext';
+import { commentRouter } from './comments/router';
+import { createRouter } from './createRouter';
 import { postRouter } from './posts/router';
 import { userRouter } from './users/user';
 
-export const appRouter = trpc
-  .router<ContextT>()
+export const appRouter = createRouter()
   .merge('post.', postRouter)
+  .merge('comment.', commentRouter)
   .merge('user.', userRouter);
 
 export type AppRouter = typeof appRouter;

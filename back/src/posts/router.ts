@@ -1,10 +1,8 @@
-import * as trpc from '@trpc/server';
 import { z } from 'zod';
 import { postSchema } from './schema';
-import type { PostRepoContext } from './PostRepoContext';
+import { createRouter } from '../createRouter';
 
-export const postRouter = trpc
-  .router<PostRepoContext>()
+export const postRouter = createRouter()
   .query('all', {
     output: z.array(postSchema),
     async resolve({ ctx }) {

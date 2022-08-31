@@ -8,6 +8,14 @@ export type ContextT = PostRepoContext & CommentRepoContext;
 const postRepo = FakePostRepo([]);
 const commentRepo = FakeCommentRepo({});
 
+export async function createTestContext(override: Partial<ContextT> = {}): Promise<ContextT> {
+  return {
+    postRepo: FakePostRepo([]),
+    commentRepo: FakeCommentRepo({}),
+    ...override
+  }
+}
+
 export async function createContext(): Promise<ContextT> {
   return { postRepo, commentRepo };
 }
