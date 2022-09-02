@@ -8,10 +8,14 @@
     "start": "node dist/server.js",
     "test": "vitest",
     "lint": "eslint src/*",
-    "lint:fix": "eslint --fix src/*"
+    "lint:fix": "eslint --fix src/*",
+    "prisma:init": "prisma db push"
   },
   "dependencies": {
     "@fastify/cors": "^8.0.0",
+    "@mikro-orm/core": "^5.4.0",
+    "@mikro-orm/sqlite": "^5.4.0",
+    "@prisma/client": "^4.3.1",
     "@trpc/server": "^9.26.2",
     "fastify": "^4.3.0",
     "tslib": "^2.4.0",
@@ -23,6 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "@typescript-eslint/parser": "^5.35.1",
     "eslint": "^8.23.0",
-    "eslint-plugin-unicorn": "^43.0.2"
+    "eslint-plugin-unicorn": "^43.0.2",
+    "prisma": "^4.3.1"
   }
 }

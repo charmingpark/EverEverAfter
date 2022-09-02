@@ -16,7 +16,7 @@ const MODIFIED_POST = {
 };
 
 // 포스트를 작성하면, 추가된다!
-describe('post', () => {
+describe('FakePostRepo', () => {
   it('scenario', async () => {
     const repo = FakePostRepo([]);
     // 처음에는 비어 있는데
