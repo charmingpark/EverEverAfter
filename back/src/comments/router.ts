@@ -23,7 +23,7 @@ export const commentRouter = trpc
       comment: commentSchema.omit({ id: true }),
     }),
     async resolve({ input, ctx }) {
-      ctx.commentRepo.addCommentToPost(input.id, input.comment);
+      void ctx.commentRepo.addCommentToPost(input.id, input.comment);
     },
   })
   .mutation('update', {
@@ -33,7 +33,7 @@ export const commentRouter = trpc
       message: z.string() 
     }),
     async resolve({ input: { postId, commentId, message }, ctx }) {
-      ctx.commentRepo.updateComment(postId, commentId, message)
+      void ctx.commentRepo.updateComment(postId, commentId, message);
     },  
   })
   .mutation('delete', {
@@ -42,6 +42,6 @@ export const commentRouter = trpc
       commentId: z.number(),
     }),
     async resolve({ input : { postId, commentId }, ctx }) {
-      ctx.commentRepo.deleteComment(postId, commentId);
+      void ctx.commentRepo.deleteComment(postId, commentId);
     },  
   });

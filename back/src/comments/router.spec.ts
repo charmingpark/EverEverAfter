@@ -10,7 +10,7 @@ describe('comments', () => {
       commentRepo: FakeCommentRepo({ [POST_ID_1]: [] })
     });
 
-    expect(() => caller.query('read', 2)).rejects.toThrowError('404');
+    await expect(() => caller.query('read', 2)).rejects.toThrowError('404');
 
     // 처음에는 id가 1인 post의 댓글 목록은 비어있다.
     expect(await caller.query('read', POST_ID_1)).toStrictEqual([]);
@@ -33,7 +33,7 @@ describe('comments', () => {
       postId: POST_ID_1,
       commentId: 1, 
       message:'바이'
-    })
+    });
 
     expect(await caller.query('read', POST_ID_1)).toStrictEqual([
       {
@@ -46,7 +46,7 @@ describe('comments', () => {
     await caller.mutation('delete', {
       postId: POST_ID_1,
       commentId: 1, 
-    })
+    });
 
     // 기대하는대로 데이터가 변경되었는지, query해서 확인한다
     expect(await caller.query('read', POST_ID_1)).toStrictEqual([]);
