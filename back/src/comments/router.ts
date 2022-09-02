@@ -25,4 +25,23 @@ export const commentRouter = trpc
     async resolve({ input, ctx }) {
       ctx.commentRepo.addCommentToPost(input.id, input.comment);
     },
+  })
+  .mutation('update', {
+    input: z.object({
+      postId: z.number(),
+      commentId: z.number(),
+      message: z.string() 
+    }),
+    async resolve({ input: { postId, commentId, message }, ctx }) {
+      ctx.commentRepo.updateComment(postId, commentId, message)
+    },  
+  })
+  .mutation('delete', {
+    input: z.object({
+      postId: z.number(),
+      commentId: z.number(),
+    }),
+    async resolve({ input : { postId, commentId }, ctx }) {
+      ctx.commentRepo.deleteComment(postId, commentId);
+    },  
   });
