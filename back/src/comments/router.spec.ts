@@ -7,25 +7,22 @@ describe('comments', () => {
   it('scenario', async () => {
     // caller를 만들고
     const caller = commentRouter.createCaller({
-      commentRepo: FakeCommentRepo({ [POST_ID_1]: [] })
+      commentRepo: FakeCommentRepo([])
     });
-
-    await expect(() => caller.query('read', 2)).rejects.toThrowError('404');
 
     // 처음에는 id가 1인 post의 댓글 목록은 비어있다.
     expect(await caller.query('read', POST_ID_1)).toStrictEqual([]);
     // id가 1인 post의 댓글을 추가한다.
     await caller.mutation('create', {
       id: POST_ID_1,
-      comment: {
-        message: '안녕',
-      },
+      message: '안녕',
     });
     // id가 1인 post의 댓글이 추가되었다.
     expect(await caller.query('read', POST_ID_1)).toStrictEqual([
       {
         id: 1,
         message: '안녕',
+        postId: POST_ID_1
       },
     ]);
 
@@ -39,6 +36,7 @@ describe('comments', () => {
       {
         id: 1,
         message: '바이',
+        postId: POST_ID_1
       },
     ]);
 
