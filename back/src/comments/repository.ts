@@ -1,3 +1,4 @@
+import { invariant } from '../invariant';
 import type { CommentT } from './schema';
 
 export interface ICommentRepository {
@@ -14,6 +15,9 @@ export interface ICommentRepository {
   deleteComment: (
     postId: CommentT['postId'],
     commentId: CommentT['id']
+  ) => Promise<void>;
+  deleteCommentsInPost: (
+    postId: CommentT['postId'],
   ) => Promise<void>;
 }
 
@@ -32,9 +36,7 @@ export function FakeCommentRepo(init: _FakeDB): ICommentRepository {
     const comment = _fakeDB.find(
       (comment) => comment.postId === postId && comment.id == commentId
     );
-    if (!comment) {
-      throw Error('????');
-    }
+    invariant(comment !== undefined, `코멘트<${commentId}>가 존재하지 않습니다`);
     return comment;
   }
 
@@ -61,5 +63,8 @@ export function FakeCommentRepo(init: _FakeDB): ICommentRepository {
 
       _fakeDB = _fakeDB.filter((comment) => comment !== targetComment);
     },
+    async deleteCommentsInPost(postId){
+      _fakeDB = _fakeDB.filter((comment) => comment.postId !== postId);
+    }
   };
 }

@@ -1,3 +1,4 @@
+import { FakeCommentRepo } from '../comments/repository';
 import { FakePostRepo } from './repository';
 import { postRouter } from './router';
 
@@ -11,6 +12,7 @@ const NEW_POST = {
 describe('posts', () => {
   it('scenario', async () => {
     const ctx = {
+      commentRepo: FakeCommentRepo([]),
       postRepo: FakePostRepo([]),
     };
     // caller를 만들고
