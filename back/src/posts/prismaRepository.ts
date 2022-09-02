@@ -15,7 +15,7 @@ function processMany(posts: PostWithImages[]): PostT[]{
   return posts.map(process);
 }
 
-export function PrismaRepo(
+export function PrismaPostRepo(
   client: Pick<PrismaClient, 'post' | 'image'>
 ): PostRepository {
   return {
