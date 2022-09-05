@@ -20,9 +20,9 @@ function PostItem({ post }: { post: PostT }) {
     }
   );
   return (
-    <li className="card shadow-md m-2 p-2 w-80">
+    <li className="w-full mb-2 mt-2 rounded-lg border-2">
       {post.images.map((src) => (
-        <img key={src} src={src} />
+        <img key={src} src={src} className="rounded-lg"/>
       ))}
       {isEditing ? (
         <form
@@ -54,8 +54,8 @@ function PostItem({ post }: { post: PostT }) {
           </div>
         </form>
       ) : (
-        <>
-          <h3 className="text-lg font-bold">{post.message}</h3>
+        <div className="p-2">
+          <p className="text-lg">{post.message}</p>
           <div className="card-actions justify-end">
             <button
               className="btn btn-primary btn-sm mb-2"
@@ -68,21 +68,41 @@ function PostItem({ post }: { post: PostT }) {
 
             <PostDeleteButton postId={post.id} />
           </div>
-        </>
+        </div>
       )}
     </li>
   );
 }
+
+const fakePosts = [
+  {
+    id: 10000,
+    message: '찬민아 결혼 정말 축하해',
+    images: [
+      'https://www.brides.com/thmb/umh5TKE4fIOD5bbbmfTHzqqj2lM=/735x0/brides-cover-image-36476d79c52f4b6d8bc9894d859649a6.jpeg',
+    ],
+  },
+  {
+    id: 10001,
+    message: '결혼 정말 축하해',
+    images: [
+      'https://www.brides.com/thmb/umh5TKE4fIOD5bbbmfTHzqqj2lM=/735x0/brides-cover-image-36476d79c52f4b6d8bc9894d859649a6.jpeg',
+    ],
+  },
+];
 
 export default function PostList() {
   const { data } = trpc.useQuery(['post.all'], { suspense: true });
 
   const posts: PostT[] = data;
   return (
-    <ul>
-      {posts.map((post) => (
+    <ul className="overflow-y-auto h-full">
+      {posts.concat(fakePosts).map((post) => (
         <PostItem key={post.id} post={post} />
       ))}
+      <li className="shadow-md w-full flex justify-center p-4 text-4xl">
+        차밍의 백년가약
+      </li>
     </ul>
   );
 }

@@ -4,7 +4,7 @@ import HomeIcon from "../components/icons/HomeIcon.astro";
 
 ---
 
-<nav class="navbar bg-red-500">
+<nav class="navbar flex-none">
   <div class="flex-none">
     <slot name="nav-left-button">
       <div class="tooltip tooltip-bottom" data-tip="프로필">
@@ -12,7 +12,6 @@ import HomeIcon from "../components/icons/HomeIcon.astro";
           <HamburgerIcon />
         </button>
       </div>
-      
     </slot>
   </div>
   <div class="flex-1 flex justify-center">
@@ -30,7 +29,7 @@ import HomeIcon from "../components/icons/HomeIcon.astro";
     </slot>
   </div>
 </nav>
-<main class="p-4 shadow-lg bg-blue-500 w-full h-full relative">
+<main class="flex-auto p-0 w-full h-5/6 relative">
   <slot />
 </main>
 
