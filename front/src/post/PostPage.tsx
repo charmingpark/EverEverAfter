@@ -10,7 +10,6 @@ const trpcClient = trpc.createClient({
 });
 
 export default function PostPage() {
-
   return (
     <trpc.Provider
       client={trpcClient}

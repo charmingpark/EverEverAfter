@@ -64,7 +64,7 @@ export default function PostForm() {
         >
           <img 
             src="https://www.brides.com/thmb/umh5TKE4fIOD5bbbmfTHzqqj2lM=/735x0/brides-cover-image-36476d79c52f4b6d8bc9894d859649a6.jpeg"
-            className="w-full mb-2"
+            className="w-full mb-2 rounded-lg"
           />
           <textarea
             ref={messageArea}
