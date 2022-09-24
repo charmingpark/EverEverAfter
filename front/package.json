@@ -18,15 +18,18 @@
     "astro": "^1.0.1",
     "happy-dom": "^6.0.4",
     "jsdom": "^20.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "typescript": "^4.7.4",
     "vitest": "^0.21.1"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.8",
-    "@trpc/client": "^9.26.2",
-    "@trpc/react": "^9.26.2",
+    "@tanstack/react-query": "^4.3.9",
+    "@trpc/client": "^9.27.2",
+    "@trpc/react": "^9.27.2",
+    "@trpc/server": "^9.27.2",
     "daisyui": "^2.22.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-query": "3"
   }
 }

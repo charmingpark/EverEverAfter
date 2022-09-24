@@ -46,8 +46,8 @@ export default function PostForm() {
         id="my-modal"
         className="modal-toggle"
         checked={isWriting}
-        readOnly
-        hidden
+        readOnly={true}
+        hidden={true}
       />
       <div className="modal">
         <form
@@ -73,9 +73,13 @@ export default function PostForm() {
             placeholder="ex) 차밍아 결혼 축하해"
             onChange={(e) => setPostInput(e.target.value)}
           />
+          {/* TODO: 꾸미기 select box */}
           <div className="modal-action p-1 mt-2">
             <button className="btn btn-primary" type="submit">
-              올리기
+              취소
+            </button>
+            <button className="btn btn-primary" type="submit">
+              등록
             </button>
           </div>
         </form>
