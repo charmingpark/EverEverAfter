@@ -14,7 +14,7 @@ export function createTest(
   teardown: () => Promise<void> = async () => undefined,
 ) {
   describe(label, () => {
-    afterAll(async () => {
+    afterEach(async () => {
       await teardown();
     });
 
