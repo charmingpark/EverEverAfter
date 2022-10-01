@@ -1,10 +1,9 @@
-import * as trpc from '@trpc/server';
-import { z } from 'zod';
-import { postSchema } from './schema';
-import type { PostRepoContext } from './PostRepoContext';
 
-export const postRouter = trpc
-  .router<PostRepoContext>()
+import { z } from 'zod';
+import { createRouter } from '../createRouter';
+import { postSchema } from './schema';
+
+export const postRouter = createRouter()
   .query('all', {
     output: z.array(postSchema),
     async resolve({ ctx }) {
@@ -14,7 +13,7 @@ export const postRouter = trpc
   .mutation('create', {
     input: postSchema.omit({ id: true }),
     async resolve({ input, ctx }) {
-      ctx.postRepo.add(input);
+      return ctx.postRepo.add(input);
     },
   })
   .mutation('delete', {
@@ -22,7 +21,9 @@ export const postRouter = trpc
       targetId: z.number(),
     }),
     async resolve({ input, ctx }) {
-      ctx.postRepo.delete(input.targetId);
+      await ctx.commentRepo.deleteCommentsInPost(input.targetId);
+
+      return ctx.postRepo.delete(input.targetId);
     },
   })
   .mutation('modify', {
@@ -31,6 +32,6 @@ export const postRouter = trpc
       newMessage: z.string(),
     }),
     async resolve({ input, ctx }) {
-      ctx.postRepo.modify(input);
+      return ctx.postRepo.modify(input);
     },
   });

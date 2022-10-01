@@ -9,16 +9,16 @@ const server = fastify({
   logger: true
 });
 
-server.register(cors, {
+void server.register(cors, {
   origin: ['http://localhost:3000']
 });
 
-server.register(fastifyTRPCPlugin, {
+void server.register(fastifyTRPCPlugin, {
   prefix: '/trpc',
   trpcOptions: { router: appRouter, createContext },
 });
 
-(async () => {
+void (async () => {
   try {
     await server.listen({
       port: 5000
