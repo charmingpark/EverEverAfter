@@ -7,15 +7,23 @@ import { MikroPostRepository } from './mikroRepository';
 
 let orm: MikroORM<SqliteDriver>;
 
+const MEMORY_NAME = ':memory:';
+
 createTest(
   'MikroPostRepository',
   async () => {
+    const dbName = MEMORY_NAME;
     orm = await MikroORM.init<SqliteDriver>({
       entities: [PostEntity, ImageEntity],
-      dbName: 'dev.db',
+      dbName,
       type: 'sqlite',
     });
 
+    if (dbName === ':memory:'){
+      const generator = orm.getSchemaGenerator();
+      await generator.createSchema();
+    }
+    
     const em = orm.em.fork();
     await em.createQueryBuilder(ImageEntity).delete();
     await em.createQueryBuilder(PostEntity).delete();

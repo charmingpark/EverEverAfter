@@ -2,10 +2,9 @@ import { invariant } from '../invariant';
 import { PostRepository } from './repository';
 
 const NEW_POST = {
+  id: 1,
   message: 'test',
-  images: [
-    'https://pbs.twimg.com/profile_banners/1261543922309849088/1615648508/1500x500',
-  ],
+  images: [],
 };
 const MODIFIED_MESSAGE = '찬민아 결혼 축하해';
 
@@ -41,10 +40,9 @@ export function createTest(
       // 수정된 post의 배열이 온다
       expect(await repo.all()).toMatchObject([
         {
+          id: 1,
           message: MODIFIED_MESSAGE,
-          images: [
-            'https://pbs.twimg.com/profile_banners/1261543922309849088/1615648508/1500x500',
-          ],
+          images: [],
         },
       ]);
 
