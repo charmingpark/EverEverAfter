@@ -32,6 +32,8 @@
         "noPropertyAccessFromIndexSignature": true,
         // [ Module Resolution ]
         "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "resolveJsonModule": true,
         "moduleResolution": "node",
         // [ Advanced ]
