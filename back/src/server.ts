@@ -21,7 +21,8 @@ void server.register(fastifyTRPCPlugin, {
 void (async () => {
   try {
     await server.listen({
-      port: 5000
+      host: '0.0.0.0',
+      port: 8000
     });
   } catch (err) {
     server.log.error(err);
