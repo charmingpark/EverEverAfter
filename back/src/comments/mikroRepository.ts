@@ -11,23 +11,22 @@ export function MikroCommentRepository(
     async getCommentsByPostId(postId) {
       const list = await em.qb(CommentEntity)
         .select(['id', 'message'])
-        .where({ post: { id: postId } })
-        .execute();
-
-      return list.map(e => ({ ...e, postId }));
+        .where({post : {id : postId}})
+        .execute()
+ 
+      return list.map(e=> ({ ...e, postId }))
     },
     async addCommentToPost(postId, message) {
-      const post = em.getReference(PostEntity, postId);
+      const post = em.getReference<PostEntity>(PostEntity, postId);
 
-      return em.qb(CommentEntity)
-        .insert({ message, post })
-        .execute();
+      await em.qb(CommentEntity).insert({
+        message,
+        post
+      })
     },
     async updateComment(postId, commentId, newMessage) {
       return em.qb(CommentEntity)
-        .update({
-          message: newMessage
-        })
+        .update({ message: newMessage })
         .where({ id: commentId, post: { id: postId } })
         .execute();
     },

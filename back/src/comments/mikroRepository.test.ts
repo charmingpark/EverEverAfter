@@ -16,23 +16,20 @@ createTest(
     const dbName = MEMORY_NAME;
     orm = await MikroORM.init<SqliteDriver>({
       entities: [PostEntity, ImageEntity, CommentEntity],
-      dbName,
+      dbName: ':memory:',
       type: 'sqlite',
     });
-
+    //테이블 생성
     if (dbName === ':memory:'){
       const generator = orm.getSchemaGenerator();
+      // console.log(await generator.getCreateSchemaSQL()) // SQL문 자동 생성
       await generator.createSchema();
     }
-    
+    // em = entity manager
     const em = orm.em.fork();
-    await em.createQueryBuilder(ImageEntity).delete();
-    await em.createQueryBuilder(PostEntity).delete();
-    await em.createQueryBuilder(CommentEntity).delete();
 
-    const post = await em.createQueryBuilder(PostEntity).insert({
-      message: 'test'
-    });
+    const post = await em.createQueryBuilder(PostEntity)
+      .insert({ message: 'test' });
 
     return {
       repo: MikroCommentRepository(em),

@@ -2,7 +2,9 @@ import { invariant } from '../invariant';
 import type { CommentT } from './schema';
 
 export interface ICommentRepository {
+  // query
   getCommentsByPostId: (postId: CommentT['postId']) => Promise<CommentT[]>;
+  // mutation
   addCommentToPost: (
     postId: CommentT['postId'],
     message: CommentT['message']

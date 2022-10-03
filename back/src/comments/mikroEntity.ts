@@ -10,16 +10,16 @@ import { PostEntity } from '../posts/mikroEntity';
 @Entity()
 export class CommentEntity {
   @PrimaryKey({ type: 'int', autoincrement: true })
-    id!: number;
+  id!: number
 
   @Property({ type: 'text' })
-    message!: string;
+  message!: string
 
   @ManyToOne(() => PostEntity)
-    post?: IdentifiedReference<PostEntity>;
+  post?: IdentifiedReference<PostEntity>
 
-  constructor(message: string) {
+  constructor(message: string, post: IdentifiedReference<PostEntity>){
     this.message = message;
+    this.post = post;
   }
 }
-  
