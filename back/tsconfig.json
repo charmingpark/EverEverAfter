@@ -37,7 +37,7 @@
         "resolveJsonModule": true,
         "moduleResolution": "node",
         // [ Advanced ]
-        // "skipLibCheck": true,
+        "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         // [ Build ]
         "listFiles": false,

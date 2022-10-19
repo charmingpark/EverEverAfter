@@ -1,0 +1,22 @@
+service: trpc-hello-world
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+
+functions:
+  http-api:
+    handler: dist/server.handler
+    events:
+      - httpApi: '*'
+  rest-api:
+    handler: dist/server.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: any
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
