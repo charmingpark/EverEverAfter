@@ -6,7 +6,7 @@ import PostList from './PostList';
 
 export const queryClient = new QueryClient();
 const trpcClient = trpc.createClient({
-  url: 'http://localhost:8000/trpc',
+  url: 'http://localhost:8000',
 });
 
 export default function PostPage() {
