@@ -8,7 +8,8 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "esnext",
-        "outDir": "dist",
+        "outDir": ".build",
+        "rootDir": "./",
         // [ Basics ]
         "strict": true,
         "strictNullChecks": true,

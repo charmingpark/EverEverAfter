@@ -1,4 +1,4 @@
-service: trpc-hello-world
+service: wedding-invitation-ever-ever-after
 frameworkVersion: '3'
 
 provider:
@@ -7,11 +7,11 @@ provider:
 
 functions:
   http-api:
-    handler: dist/server.handler
+    handler: .build/src/server.handler
     events:
       - httpApi: '*'
   rest-api:
-    handler: dist/server.handler
+    handler: .build/src/server.handler
     events:
       - http:
           path: /{proxy+}
