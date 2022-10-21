@@ -5,3 +5,4 @@ back/yarn.lock
 back/prisma/dev.db
 back/dev.db
 back/prisma
+back/.serverless
