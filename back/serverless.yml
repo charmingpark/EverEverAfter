@@ -5,7 +5,7 @@ provider:
   name: aws
   runtime: nodejs16.x
   profile: default
-  region: 
+  region: ap-northeast-2
 
 functions:
   http-api:
