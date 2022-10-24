@@ -3,25 +3,27 @@ import ProfileIcon from "../components/icons/ProfileIcon.astro";
 import BottomNav from "../layouts/BottomNav.astro";
 import Layout from "../layouts/Layout.astro";
 import PhoneLayout from "../layouts/PhoneLayout.astro";
+import BackArrowIcon from "../components/icons/BackArrowIcon.astro";
+import WeddingPage from "src/components/WeddingPage.astro";
+import LandingPage from "src/components/LandingPage.astro";
+
 ---
 
 <Layout title="차밍의 백년가약">
-	<PhoneLayout>
-		<span slot="title" class="text-xl">百年佳約</span>
-		<div
-			slot="nav-right-button"
-			class="tooltip tooltip-bottom"
-			data-tip="프로필 보기"
-		>
-			<button class="btn btn-square btn-ghost" aria-label="프로필 보기">
-				<ProfileIcon />
-			</button>
-		</div>
-		내용
-	</PhoneLayout>
-	<BottomNav>
-		<div slot="footer-right-button">
-			<a href="/greeting" class="btn btn-ghost w-full">인사말</a>
-		</div>
-	</BottomNav>
+	<div class="wedding-pages-container">
+		<LandingPage />
+		<WeddingPage>2</WeddingPage>
+		<WeddingPage>3</WeddingPage>
+	</div>
 </Layout>
+
+<style>
+	.wedding-pages-container {
+		scroll-snap-type: y proximity;
+		height: 100vh;
+		/* overflow-y: auto; */
+	}
+
+
+	
+</style>

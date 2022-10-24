@@ -30,7 +30,12 @@ function PostItem({ post }: { post: PostT }) {
       ))} */}
       <header>
         <p>글쓴이: 김태희</p>
+        {/* TODO: 글쓴이 이름을 서버에서 받아 넣으세요. */}
+        <p>작성시간: 2022.10.10</p>
+        {/* TODO: 최초 작성된 시간을 서버에서 받아 넣으세요. */}
       </header>
+      {/* TODO: 수정하기와 삭제 는 글쓴이가 동일해야지만 가능합니다. */}
+
       {isEditing ? (
         <form
           onSubmit={(e) => {
@@ -80,9 +85,14 @@ function PostItem({ post }: { post: PostT }) {
       <div>
         <button>❤️</button>
         <button>😄</button>
-        이모지 반응?
+        이모지 반응 선택
+        {/* TODO: 이모지 반응을 선택하게 해 주세요. */}
+        {/* TODO: 이모지 반응갯수를 세 주세요.
+        이모지를 클릭한 사람이 같은 사람일 경우에는 취소가 되게 해 주세요. 
+        본인이 선택한 이모지의 경우 배경색을 표시해 주세요. */}
+        
       </div>
-      {/* TODO: 댓글 - merge 후에 */}
+      {/* TODO: 댓글 - 회의 후, 머지를 성공시킨 후에 구현하세요. */}
     </li>
   );
 }
@@ -95,8 +105,9 @@ export default function PostList() {
       {posts!.map((post) => (
         <PostItem key={post.id} post={post} />
       ))}
+      {/* TODO: 게시글의 최신글이 맨 위로 오게 한다. */}
       <li className="shadow-md w-full flex justify-center p-4 text-4xl">
-        차밍의 백년가약
+        {posts!.length === 0 ? "방명록 게시글이 없습니다." : "--" }
       </li>
     </ul>
   );
