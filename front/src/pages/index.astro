@@ -1,18 +1,15 @@
 ---
-import ProfileIcon from "../components/icons/ProfileIcon.astro";
-import BottomNav from "../layouts/BottomNav.astro";
 import Layout from "../layouts/Layout.astro";
-import PhoneLayout from "../layouts/PhoneLayout.astro";
-import BackArrowIcon from "../components/icons/BackArrowIcon.astro";
-import WeddingPage from "src/components/WeddingPage.astro";
-import LandingPage from "src/components/LandingPage.astro";
+import WeddingPage from "../components/WeddingPage.astro";
+import LandingPage from "../components/LandingPage.astro";
+import GreetingPage from "../components/GreetingPage.astro";
 
 ---
 
 <Layout title="차밍의 백년가약">
 	<div class="wedding-pages-container">
 		<LandingPage />
-		<WeddingPage>2</WeddingPage>
+		<GreetingPage />
 		<WeddingPage>3</WeddingPage>
 	</div>
 </Layout>
@@ -21,9 +18,6 @@ import LandingPage from "src/components/LandingPage.astro";
 	.wedding-pages-container {
 		scroll-snap-type: y proximity;
 		height: 100vh;
-		/* overflow-y: auto; */
+		overflow-y: auto;
 	}
-
-
-	
 </style>
