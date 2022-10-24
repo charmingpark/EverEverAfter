@@ -1,5 +1,5 @@
 ---
-import HamburgerIcon from "../components/icons/HamburgerIcon.astro";
+import BackArrowIcon from "../components/icons/BackArrowIcon.astro";
 import HomeIcon from "../components/icons/HomeIcon.astro";
 
 ---
@@ -7,9 +7,10 @@ import HomeIcon from "../components/icons/HomeIcon.astro";
 <nav class="navbar flex-none">
   <div class="flex-none">
     <slot name="nav-left-button">
-      <div class="tooltip tooltip-bottom" data-tip="프로필">
-        <button class="btn btn-square btn-ghost" aria-label="프로필">
-          <HamburgerIcon />
+      <div class="tooltip tooltip-bottom" data-tip="뒤로가기">
+        <button class="btn btn-square btn-ghost" aria-label="뒤로가기">
+          <BackArrowIcon />
+          <!-- TODO: 방명록 일 때 만 등장. -->
         </button>
       </div>
     </slot>
@@ -17,6 +18,7 @@ import HomeIcon from "../components/icons/HomeIcon.astro";
   <div class="flex-1 flex justify-center">
     <slot name="title">
       <span class="text-xl">百年佳約</span>
+      <!-- TODO: 로고를 클릭하면 메인화면으로 가기. -->
     </slot>
   </div>
   <div class="flex-none">

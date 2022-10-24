@@ -23,8 +23,10 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.8",
-    "@trpc/client": "^9.26.2",
-    "@trpc/react": "^9.26.2",
+    "@tanstack/react-query": "^4.3.9",
+    "@trpc/client": "^9.27.2",
+    "@trpc/react": "^9.27.2",
+    "@trpc/server": "^9.27.2",
     "daisyui": "^2.22.0",
     "react-query": "3",
     "react": "^18.2.0",

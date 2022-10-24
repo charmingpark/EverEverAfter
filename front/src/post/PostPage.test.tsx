@@ -53,7 +53,7 @@ describe('PostList', () => {
     await user.type(input, '차밍아 결혼 축하한다!');
     await user.click(
       screen.getByRole('button', {
-        name: '올리기',
+        name: '등록',
       })
     );
 

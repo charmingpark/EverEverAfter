@@ -8,6 +8,11 @@ import PhoneLayout from "../layouts/PhoneLayout.astro";
   <PhoneLayout>
     <span slot="title" class="text-xl">인사말</span>
     내용
+    <div
+			slot="nav-left-button"
+			class="tooltip tooltip-bottom"
+			data-tip="">
+		</div>
   </PhoneLayout>
   <BottomNav>
     <a slot="footer-right-button" href="/post" class="btn btn-ghost w-full">방명록</a>

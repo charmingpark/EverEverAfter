@@ -46,12 +46,12 @@ export default function PostForm() {
         id="my-modal"
         className="modal-toggle"
         checked={isWriting}
-        readOnly
-        hidden
+        readOnly={true}
+        hidden={true}
       />
       <div className="modal">
         <form
-          className="modal-box h-fit"
+          className="modal-box h-full "
           onSubmit={(e) => {
             e.preventDefault();
             createMutation.mutateAsync({
@@ -62,7 +62,7 @@ export default function PostForm() {
             setIsWriting(false);
           }}
         >
-          <img 
+          {/* <img 
             src="https://www.brides.com/thmb/umh5TKE4fIOD5bbbmfTHzqqj2lM=/735x0/brides-cover-image-36476d79c52f4b6d8bc9894d859649a6.jpeg"
             className="w-full mb-2 rounded-lg"
           />
@@ -70,12 +70,16 @@ export default function PostForm() {
             ref={messageArea}
             className="textarea textarea-bordered w-full h-3/4"
             value={postInput}
-            placeholder="ex) 차밍아 결혼 축하해"
+            placeholder= {`${"'작성자 이름'"}` + " 님, 박찬민님과 김동진님께 축하메시지를 남겨주세요."}
             onChange={(e) => setPostInput(e.target.value)}
           />
+          {/* TODO: 꾸미기 select box */}
           <div className="modal-action p-1 mt-2">
-            <button className="btn btn-primary" type="submit">
-              올리기
+            <button className="btn btn-error btn-sm" type="submit">
+              취소
+            </button>
+            <button className="btn btn-primary btn-sm" type="submit">
+              등록
             </button>
           </div>
         </form>
