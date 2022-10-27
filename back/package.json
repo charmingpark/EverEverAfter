@@ -10,14 +10,14 @@
     "lint": "eslint src/*",
     "lint:fix": "eslint --fix src/*",
     "prisma:init": "prisma db push",
-    "start-server": "npx serverless offline --httpPort 8000"
+    "start-server": "npx serverless offline --httpPort 8000",
+    "deploy": "yarn build && serverless deploy"
   },
   "dependencies": {
     "@fastify/cors": "^8.0.0",
     "@mikro-orm/cli": "^5.4.0",
     "@mikro-orm/core": "^5.4.0",
     "@mikro-orm/sqlite": "^5.4.0",
-    "@prisma/client": "^4.3.1",
     "@trpc/server": "^9.26.2",
     "aws-lambda": "^1.0.7",
     "fastify": "^4.3.0",
@@ -32,6 +32,8 @@
     "prisma": "^4.3.1",
     "serverless": "^3.23.0",
     "serverless-offline": "^11.1.3",
+    "serverless-plugin-common-excludes": "^4.0.0",
+    "serverless-plugin-include-dependencies": "^5.0.0",
     "serverless-plugin-typescript": "^2.1.4",
     "typescript": "^4.8.4",
     "vitest": "^0.21.0"

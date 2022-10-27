@@ -6,7 +6,8 @@ import PostList from './PostList';
 
 export const queryClient = new QueryClient();
 const trpcClient = trpc.createClient({
-  url: 'https://61pif65yuf.execute-api.ap-northeast-2.amazonaws.com',
+  url: 'https://61pif65yuf.execute-api.ap-northeast-2.amazonaws.com'
+  // url: 'http://localhost:8000',
 });
 
 export default function PostPage() {
