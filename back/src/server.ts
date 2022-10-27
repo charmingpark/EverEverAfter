@@ -1,18 +1,29 @@
 import { awsLambdaRequestHandler } from '@trpc/server/adapters/aws-lambda';
-import { createContext } from './createContext';
-import { appRouter } from '.';
+import { createAWSContext } from './createContext';
+import { awsAppRouter } from '.';
+
+const headers = {
+  'Access-Control-Allow-Origin': 'http://localhost:3000',
+  'Access-Control-Request-Method': '*',
+  'Access-Control-Allow-Methods': 'OPTIONS, GET, POST',
+  'Access-Control-Allow-Headers': '*',
+};
 
 export const handler = awsLambdaRequestHandler({
-  router: appRouter,
-  createContext,
-  responseMeta() {
-    return {
-      headers: {
-        "Access-Control-Allow-Origin": "http://localhost:3000",
-        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, X-Amz-Date, Authorization, X-Api-Key, X-Amz-Security-Token",
-      },
-    };
+  router: awsAppRouter,
+  createContext: createAWSContext,
+  batching: {
+    enabled: true
+  },
+  responseMeta({ ctx }) {
+    const method = ctx?.event.requestContext.http.method;
+    if (method === 'OPTIONS' || method === undefined){
+      return {
+        status: 200,
+        headers,
+      };
+    }
+    return { headers };
   },
 });
 
