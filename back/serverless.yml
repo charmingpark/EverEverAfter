@@ -3,6 +3,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
+  deploymentMethod: direct
   runtime: nodejs16.x
   profile: default
   region: ap-northeast-2
@@ -10,15 +11,12 @@ provider:
 functions:
   http-api:
     handler: .build/src/server.handler
+    url:
+      cors: true
     events:
       - httpApi: '*'
-  rest-api:
-    handler: .build/src/server.handler
-    events:
-      - http:
-          path: /{proxy+}
-          method: any
 
 plugins:
   - serverless-plugin-typescript
   - serverless-offline
+  - serverless-plugin-common-excludes

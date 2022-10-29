@@ -1,7 +1,9 @@
 import { CommentRepoContext } from './comments/CommentRepoContext';
 import { FakeCommentRepo } from './comments/repository';
-import type { PostRepoContext } from './posts/PostRepoContext';
 import { FakePostRepo } from './posts/repository';
+import type { PostRepoContext } from './posts/PostRepoContext';
+import type { APIGatewayProxyEventV2 } from 'aws-lambda';
+import type { CreateAWSLambdaContextOptions} from '@trpc/server/adapters/aws-lambda';
 
 export type ContextT = PostRepoContext & CommentRepoContext;
 
@@ -13,4 +15,10 @@ const commentRepo = FakeCommentRepo([]);
 
 export async function createContext(): Promise<ContextT> {
   return { postRepo, commentRepo };
+}
+
+export type AWSContextT = ContextT & CreateAWSLambdaContextOptions<APIGatewayProxyEventV2>;
+
+export async function createAWSContext({ event, context }: CreateAWSLambdaContextOptions<APIGatewayProxyEventV2>): Promise<AWSContextT> {
+  return { postRepo, commentRepo, event, context };
 }
