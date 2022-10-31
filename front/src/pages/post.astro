@@ -9,6 +9,6 @@ import Layout from '../layouts/Layout.astro';
   <WeddingPage>
     <h1>방명록</h1>
     <a href="/#door-to-post">돌아가기</a>
-		<PostPage client:load />
+		<PostPage client:only="react" />
   </WeddingPage>
 </Layout>
