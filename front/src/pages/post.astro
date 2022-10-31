@@ -1,11 +1,14 @@
 ---
-import WeddingPage from 'src/components/WeddingPage.astro';
+import WeddingPage from '../components/WeddingPage.astro';
+import PostPage from '../post/PostPage';
 import Layout from '../layouts/Layout.astro';
+
 ---
 
 <Layout title="차밍의 백년가약">
   <WeddingPage>
     <h1>방명록</h1>
     <a href="/#door-to-post">돌아가기</a>
+		<PostPage client:load />
   </WeddingPage>
 </Layout>
