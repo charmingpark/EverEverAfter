@@ -8,7 +8,8 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "esnext",
-        "outDir": "dist",
+        "outDir": ".build",
+        "rootDir": "./",
         // [ Basics ]
         "strict": true,
         "strictNullChecks": true,
@@ -32,10 +33,12 @@
         "noPropertyAccessFromIndexSignature": true,
         // [ Module Resolution ]
         "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "resolveJsonModule": true,
         "moduleResolution": "node",
         // [ Advanced ]
-        // "skipLibCheck": true,
+        "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         // [ Build ]
         "listFiles": false,

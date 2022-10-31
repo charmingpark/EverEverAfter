@@ -1,6 +1,7 @@
 import type { PostT } from './schema';
 
 export interface PostRepository {
+  has: (id: PostT['id']) => Promise<boolean>;
   all: () => Promise<PostT[]>;
   add: (newPost: Omit<PostT, 'id'>) => Promise<void>;
   delete: (targetId: PostT['id']) => Promise<void>;
@@ -15,6 +16,9 @@ export function FakePostRepo(init: PostT[]): PostRepository {
   let _count = Math.max(0, ...init.map((post) => post.id));
 
   return {
+    async has(id){
+      return _fakeDB.some(post => post.id === id);
+    },
     async all() {
       return _fakeDB;
     },
@@ -51,4 +55,6 @@ export function FakePostRepo(init: PostT[]): PostRepository {
     },
   };
 }
+
+
 
