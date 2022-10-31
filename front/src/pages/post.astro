@@ -1,12 +1,11 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import PhoneLayout from "../layouts/PhoneLayout.astro";
-import PostPage from "../post/PostPage";
+import WeddingPage from 'src/components/WeddingPage.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="차밍의 백년가약">
-	<PhoneLayout>
-		<span slot="title" class="text-xl">방명록</span>
-		<PostPage client:load />
-	</PhoneLayout>
+  <WeddingPage>
+    <h1>방명록</h1>
+    <a href="/#door-to-post">돌아가기</a>
+  </WeddingPage>
 </Layout>
